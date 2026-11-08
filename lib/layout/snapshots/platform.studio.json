@@ -1,0 +1,174 @@
+{
+  "format": "break-rocks-layout/1",
+  "universe": "%root",
+  "name": "studio",
+  "description": "Studio: the composer at the top of the feed, the address bar at the bottom on a phone",
+  "derive": false,
+  "canvases": {
+    "desktop": {
+      "columns": 12,
+      "items": [
+        {
+          "widget": "identityBar",
+          "variant": "full",
+          "row": 1,
+          "col": 1,
+          "cols": 12
+        },
+        {
+          "widget": "rulesPost",
+          "variant": "full",
+          "row": 2,
+          "col": 1,
+          "cols": 8,
+          "params": {
+            "folded": true
+          }
+        },
+        {
+          "widget": "headRow",
+          "variant": "full",
+          "row": 3,
+          "col": 1,
+          "cols": 8
+        },
+        {
+          "widget": "feed",
+          "variant": "wide",
+          "row": 4,
+          "col": 1,
+          "cols": 8,
+          "params": {
+            "filter": "ALL",
+            "composer": "top"
+          },
+          "gestures": {
+            "doubleTap": "fullScreen"
+          },
+          "surface": "transparent"
+        },
+        {
+          "widget": "timeColumn",
+          "variant": "compact",
+          "row": 2,
+          "col": 9,
+          "cols": 4,
+          "rows": 3,
+          "params": {
+            "chart": "gauge"
+          }
+        }
+      ],
+      "rails": [],
+      "derived": false
+    },
+    "tablet": {
+      "columns": 8,
+      "items": [
+        {
+          "widget": "identityBar",
+          "variant": "full",
+          "row": 1,
+          "col": 1,
+          "cols": 8
+        },
+        {
+          "widget": "rulesPost",
+          "variant": "full",
+          "row": 2,
+          "col": 1,
+          "cols": 5,
+          "params": {
+            "folded": true
+          }
+        },
+        {
+          "widget": "headRow",
+          "variant": "full",
+          "row": 3,
+          "col": 1,
+          "cols": 5
+        },
+        {
+          "widget": "feed",
+          "variant": "medium",
+          "row": 4,
+          "col": 1,
+          "cols": 5,
+          "params": {
+            "filter": "ALL",
+            "composer": "top"
+          },
+          "gestures": {
+            "doubleTap": "fullScreen"
+          },
+          "surface": "transparent"
+        },
+        {
+          "widget": "timeColumn",
+          "variant": "compact",
+          "row": 2,
+          "col": 6,
+          "cols": 3,
+          "rows": 3,
+          "params": {
+            "chart": "gauge"
+          }
+        }
+      ],
+      "rails": [],
+      "derived": false
+    },
+    "phone": {
+      "columns": 4,
+      "addressBar": "bottom",
+      "items": [
+        {
+          "widget": "identityBar",
+          "variant": "full",
+          "row": 1,
+          "col": 1,
+          "cols": 4
+        },
+        {
+          "widget": "timeColumn",
+          "variant": "full",
+          "row": 2,
+          "col": 1,
+          "cols": 4,
+          "params": {
+            "chart": "gauge"
+          }
+        },
+        {
+          "widget": "rulesPost",
+          "variant": "full",
+          "row": 3,
+          "col": 1,
+          "cols": 4,
+          "params": {
+            "folded": true
+          }
+        },
+        {
+          "widget": "feed",
+          "variant": "full",
+          "row": 4,
+          "col": 1,
+          "cols": 4,
+          "params": {
+            "filter": "ALL",
+            "composer": "top"
+          },
+          "gestures": {
+            "doubleTap": "fullScreen"
+          },
+          "surface": "transparent"
+        }
+      ],
+      "rails": [],
+      "derived": false
+    }
+  },
+  "registryVersion": 3
+}

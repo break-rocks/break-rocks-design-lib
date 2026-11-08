@@ -1,0 +1,25 @@
+{
+  "format": "break-rocks-theme/1",
+  "universe": "%root",
+  "name": "vestiaire",
+  "description": "Scoreboard, timer, podiums",
+  "creator": "a1b2c3d4-0000-4000-8000-000000000002",
+  "copiedFrom": { "universe": "%root", "name": "socle" },
+  "variants": {
+    "night": { "palette": { "background": "#0E1116", "surface": "#161B22", "text": "#F2F4F7", "primary": "#E5484D", "accent": "#4CC2FF", "link": "#7CC4FF" } },
+    "day": { "palette": { "background": "#FFFFFF", "surface": "#F4F5F7", "text": "#14171C", "primary": "#C8102E", "accent": "#0067B8", "link": "#0057A0" } }
+  },
+  "typography": { "title": "Oswald" },
+  "gradient": ["#0E1116", "#4CC2FF"],
+  "motionAccents": true,
+  "shape": { "radius": "sharp", "stroke": 1 },
+  "images": {
+    "banner": { "day": "img-01HZX7R01", "night": "img-01HZX7R02" },
+    "background": { "day": "img-01HZX7R03" },
+    "wordmark": "img-01HZX7R04",
+    "texture": null,
+    "pattern": null
+  },
+  "stickers": [],
+  "collection": "SPORT"
+}

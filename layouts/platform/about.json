@@ -1,0 +1,52 @@
+{
+  "format": "break-rocks-layout/1",
+  "universe": "%root",
+  "name": "about",
+  "description": "The about page of a public universe: the identity, the showcase, the rules and texts and the universe territory, then the free blocks of its presentation",
+  "page": "about",
+  "derive": true,
+  "canvases": {
+    "desktop": {
+      "columns": 12,
+      "items": [
+        {
+          "widget": "identityBar",
+          "variant": "full",
+          "row": 1,
+          "col": 1,
+          "cols": 12
+        },
+        {
+          "widget": "showcase",
+          "variant": "medium",
+          "row": 2,
+          "col": 1,
+          "cols": 6
+        },
+        {
+          "widget": "rules",
+          "variant": "medium",
+          "row": 2,
+          "col": 7,
+          "cols": 6
+        },
+        {
+          "widget": "map",
+          "variant": "medium",
+          "row": 3,
+          "col": 1,
+          "cols": 6,
+          "params": {
+            "territory": true,
+            "events": false,
+            "subUniverses": false,
+            "locatableResidents": false
+          }
+        }
+      ],
+      "rails": []
+    },
+    "tablet": null,
+    "phone": null
+  }
+}

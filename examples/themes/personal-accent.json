@@ -1,0 +1,11 @@
+{
+  "format": "break-rocks-theme/2",
+  "name": "my-teal",
+  "variants": {
+    "night": { "palette": { "accent": "#2BC4B4" } },
+    "day": { "palette": { "accent": "#0F7F74" } }
+  },
+  "density": "NORMAL",
+  "motion": "REDUCED",
+  "sounds": false
+}

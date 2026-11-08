@@ -1,0 +1,23 @@
+{
+  "format": "break-rocks-layout/1",
+  "universe": "%paris",
+  "name": "broken",
+  "description": "A rail on the top side",
+  "derive": true,
+  "canvases": {
+    "desktop": {
+      "columns": 12,
+      "items": [
+        { "widget": "identityBar", "variant": "full", "row": 1, "col": 1, "cols": 12 },
+        { "widget": "rulesPost", "variant": "full", "row": 2, "col": 1, "cols": 8 },
+        { "widget": "feed", "variant": "wide", "row": 3, "col": 1, "cols": 8 },
+        { "widget": "timeColumn", "variant": "compact", "row": 2, "col": 9, "cols": 4, "rows": 2 }
+      ],
+      "rails": [
+        { "id": "top", "side": "TOP" }
+      ]
+    },
+    "tablet": null,
+    "phone": null
+  }
+}

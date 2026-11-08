@@ -1,0 +1,26 @@
+{
+  "format": "break-rocks-layout/1",
+  "universe": "%paris",
+  "name": "feed-first",
+  "description": "Feed first of v46.0.0, its tablet and phone canvases derived",
+  "copiedFrom": {
+    "universe": "%root",
+    "name": "feed-first"
+  },
+  "derive": true,
+  "canvases": {
+    "desktop": {
+      "columns": 12,
+      "items": [
+        { "widget": "identityBar", "variant": "full", "row": 1, "col": 1, "cols": 12 },
+        { "widget": "rulesPost", "variant": "full", "row": 2, "col": 1, "cols": 8, "params": { "folded": true } },
+        { "widget": "headRow", "variant": "full", "row": 3, "col": 1, "cols": 8 },
+        { "widget": "feed", "variant": "wide", "row": 4, "col": 1, "cols": 8, "params": { "filter": "ALL", "composer": "none" }, "gestures": { "doubleTap": "fullScreen" } },
+        { "widget": "timeColumn", "variant": "compact", "row": 2, "col": 9, "cols": 4, "rows": 3, "params": { "chart": "gauge" } }
+      ],
+      "rails": []
+    },
+    "tablet": null,
+    "phone": null
+  }
+}

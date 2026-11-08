@@ -1,0 +1,32 @@
+{
+  "format": "break-rocks-layout/1",
+  "universe": "%paris",
+  "name": "broken",
+  "description": "The live button of the time column in a folded rail of the phone: only a pinned rail shows it without a gesture",
+  "derive": true,
+  "canvases": {
+    "desktop": {
+      "columns": 12,
+      "items": [
+        { "widget": "identityBar", "variant": "full", "row": 1, "col": 1, "cols": 12 },
+        { "widget": "rulesPost", "variant": "full", "row": 2, "col": 1, "cols": 8 },
+        { "widget": "feed", "variant": "wide", "row": 3, "col": 1, "cols": 8 },
+        { "widget": "timeColumn", "variant": "compact", "row": 2, "col": 9, "cols": 4, "rows": 2 }
+      ],
+      "rails": []
+    },
+    "tablet": null,
+    "phone": {
+      "columns": 4,
+      "items": [
+        { "widget": "identityBar", "variant": "full", "row": 1, "col": 1, "cols": 4 },
+        { "widget": "rulesPost", "variant": "full", "row": 2, "col": 1, "cols": 4 },
+        { "widget": "feed", "variant": "full", "row": 3, "col": 1, "cols": 4 },
+        { "widget": "timeColumn", "variant": "button", "rail": "start", "behavior": { "kind": "OPEN" } }
+      ],
+      "rails": [
+        { "id": "start", "side": "START", "folded": true }
+      ]
+    }
+  }
+}

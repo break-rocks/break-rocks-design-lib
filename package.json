@@ -1,0 +1,31 @@
+{
+  "name": "@breakrocks/design-lib",
+  "version": "4.2.0",
+  "private": false,
+  "description": "The public subset of the break.rocks design system: the shared libraries of the themes and the layouts, their schemas, the widget registry, the platform layouts, examples and the web tokens. Generated from break-rocks-design; consumed as a git submodule, never published to npm.",
+  "license": "MIT",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/break-rocks/break-rocks-design-lib.git"
+  },
+  "homepage": "https://github.com/break-rocks/break-rocks-design-lib#readme",
+  "engines": {
+    "node": ">=24"
+  },
+  "exports": {
+    "./theme": "./lib/theme/index.ts",
+    "./layout": "./lib/layout/index.ts",
+    "./tokens": "./dist/web/tokens.ts",
+    "./tokens.css": "./dist/web/tokens.css",
+    "./schemas/*": "./schemas/*",
+    "./registry/*": "./registry/*",
+    "./layouts/platform/*": "./layouts/platform/*",
+    "./examples/*": "./examples/*",
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "test": "node --test lib/theme/theme.test.ts lib/layout/layout.test.ts",
+    "prepublishOnly": "node -e \"console.error('@breakrocks/design-lib is not published to npm: use it as a git submodule pinned on a tag'); process.exit(1)\""
+  }
+}

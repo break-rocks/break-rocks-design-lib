@@ -1,0 +1,39 @@
+{
+  "format": "break-rocks-layout/1",
+  "universe": "%root",
+  "name": "agenda",
+  "description": "The agenda page of a public universe: the agenda and the map widget",
+  "page": "agenda",
+  "derive": true,
+  "canvases": {
+    "desktop": {
+      "columns": 12,
+      "items": [
+        {
+          "widget": "identityBar",
+          "variant": "full",
+          "row": 1,
+          "col": 1,
+          "cols": 12
+        },
+        {
+          "widget": "agenda",
+          "variant": "medium",
+          "row": 2,
+          "col": 1,
+          "cols": 7
+        },
+        {
+          "widget": "map",
+          "variant": "medium",
+          "row": 2,
+          "col": 8,
+          "cols": 5
+        }
+      ],
+      "rails": []
+    },
+    "tablet": null,
+    "phone": null
+  }
+}

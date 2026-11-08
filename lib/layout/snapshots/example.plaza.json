@@ -1,0 +1,224 @@
+{
+  "format": "break-rocks-layout/1",
+  "universe": "%root",
+  "name": "plaza",
+  "description": "The agenda beside the feed",
+  "copiedFrom": {
+    "universe": "%root",
+    "name": "feed-first"
+  },
+  "derive": true,
+  "canvases": {
+    "desktop": {
+      "columns": 12,
+      "items": [
+        {
+          "widget": "identityBar",
+          "variant": "full",
+          "row": 1,
+          "col": 1,
+          "cols": 8
+        },
+        {
+          "widget": "layoutSwitcher",
+          "variant": "full",
+          "row": 1,
+          "col": 9,
+          "cols": 4
+        },
+        {
+          "widget": "rulesPost",
+          "variant": "full",
+          "row": 2,
+          "col": 1,
+          "cols": 8,
+          "params": {
+            "folded": true
+          }
+        },
+        {
+          "widget": "feed",
+          "variant": "wide",
+          "row": 3,
+          "col": 1,
+          "cols": 8,
+          "params": {
+            "filter": "ALL",
+            "composer": "none"
+          },
+          "gestures": {
+            "doubleTap": "fullScreen"
+          }
+        },
+        {
+          "widget": "timeColumn",
+          "variant": "compact",
+          "row": 2,
+          "col": 9,
+          "cols": 4,
+          "rows": 2,
+          "params": {
+            "chart": "gauge"
+          }
+        },
+        {
+          "widget": "agenda",
+          "variant": "button",
+          "rail": "end",
+          "behavior": {
+            "kind": "OPEN"
+          },
+          "contextual": "button"
+        }
+      ],
+      "rails": [
+        {
+          "id": "end",
+          "side": "END",
+          "folded": false
+        }
+      ],
+      "derived": false
+    },
+    "tablet": {
+      "columns": 8,
+      "items": [
+        {
+          "widget": "identityBar",
+          "variant": "full",
+          "row": 1,
+          "col": 1,
+          "cols": 5
+        },
+        {
+          "widget": "layoutSwitcher",
+          "variant": "full",
+          "row": 1,
+          "col": 6,
+          "cols": 3
+        },
+        {
+          "widget": "rulesPost",
+          "variant": "full",
+          "row": 2,
+          "col": 1,
+          "cols": 5,
+          "params": {
+            "folded": true
+          }
+        },
+        {
+          "widget": "timeColumn",
+          "variant": "compact",
+          "row": 2,
+          "col": 6,
+          "cols": 3,
+          "rows": 2,
+          "params": {
+            "chart": "gauge"
+          }
+        },
+        {
+          "widget": "feed",
+          "variant": "medium",
+          "row": 3,
+          "col": 1,
+          "cols": 5,
+          "params": {
+            "filter": "ALL",
+            "composer": "none"
+          },
+          "gestures": {
+            "doubleTap": "fullScreen"
+          }
+        },
+        {
+          "widget": "agenda",
+          "variant": "button",
+          "rail": "end",
+          "behavior": {
+            "kind": "OPEN"
+          },
+          "contextual": "button"
+        }
+      ],
+      "rails": [
+        {
+          "id": "end",
+          "side": "END",
+          "folded": false
+        }
+      ],
+      "derived": true
+    },
+    "phone": {
+      "columns": 4,
+      "items": [
+        {
+          "widget": "identityBar",
+          "variant": "full",
+          "row": 1,
+          "col": 1,
+          "cols": 4
+        },
+        {
+          "widget": "timeColumn",
+          "variant": "button",
+          "row": 2,
+          "col": 1,
+          "cols": 1,
+          "params": {
+            "chart": "gauge"
+          }
+        },
+        {
+          "widget": "rulesPost",
+          "variant": "full",
+          "row": 3,
+          "col": 1,
+          "cols": 4,
+          "params": {
+            "folded": true
+          }
+        },
+        {
+          "widget": "feed",
+          "variant": "full",
+          "row": 4,
+          "col": 1,
+          "cols": 4,
+          "params": {
+            "filter": "ALL",
+            "composer": "none"
+          },
+          "gestures": {
+            "doubleTap": "fullScreen"
+          }
+        },
+        {
+          "widget": "layoutSwitcher",
+          "variant": "hidden"
+        },
+        {
+          "widget": "agenda",
+          "variant": "button",
+          "rail": "end",
+          "contextual": "button",
+          "behavior": {
+            "kind": "OPEN"
+          }
+        }
+      ],
+      "rails": [
+        {
+          "id": "end",
+          "side": "END",
+          "folded": true
+        }
+      ],
+      "derived": true,
+      "addressBar": "top"
+    }
+  },
+  "registryVersion": 3
+}

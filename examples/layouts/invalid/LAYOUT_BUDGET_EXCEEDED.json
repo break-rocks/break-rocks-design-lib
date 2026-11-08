@@ -1,0 +1,35 @@
+{
+  "format": "break-rocks-layout/1",
+  "universe": "%paris",
+  "name": "broken",
+  "description": "7 widgets on a tablet canvas",
+  "derive": true,
+  "canvases": {
+    "desktop": {
+      "columns": 12,
+      "items": [
+        { "widget": "identityBar", "variant": "full", "row": 1, "col": 1, "cols": 12 },
+        { "widget": "rulesPost", "variant": "full", "row": 2, "col": 1, "cols": 8 },
+        { "widget": "feed", "variant": "wide", "row": 3, "col": 1, "cols": 8 },
+        { "widget": "timeColumn", "variant": "compact", "row": 2, "col": 9, "cols": 4, "rows": 2 }
+      ],
+      "rails": []
+    },
+    "tablet": {
+      "columns": 8,
+      "items": [
+        { "widget": "identityBar", "variant": "full", "row": 1, "col": 1, "cols": 8 },
+        { "widget": "rulesPost", "variant": "full", "row": 2, "col": 1, "cols": 5 },
+        { "widget": "feed", "variant": "medium", "row": 3, "col": 1, "cols": 5, "rows": 6 },
+        { "widget": "timeColumn", "variant": "compact", "row": 2, "col": 6, "cols": 3, "rows": 2 },
+        { "widget": "agenda", "variant": "compact", "row": 4, "col": 6, "cols": 3 },
+        { "widget": "debates", "variant": "compact", "row": 5, "col": 6, "cols": 3 },
+        { "widget": "projects", "variant": "compact", "row": 6, "col": 6, "cols": 3 },
+        { "widget": "clips", "variant": "compact", "row": 7, "col": 6, "cols": 3 },
+        { "widget": "whoGoverns", "variant": "compact", "row": 8, "col": 6, "cols": 3 }
+      ],
+      "rails": []
+    },
+    "phone": null
+  }
+}

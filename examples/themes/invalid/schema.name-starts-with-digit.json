@@ -1,0 +1,2 @@
+{ "format": "break-rocks-theme/2", "universe": "%gaming", "name": "9lives",
+  "variants": { "night": { "palette": { "text": "#F2F4F7" } }, "day": { "palette": { "text": "#14171C" } } } }

@@ -1,0 +1,674 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:break-rocks:schema:theme-v2",
+  "title": "break-rocks theme, format 2 (and format 1)",
+  "description": "A theme of the format break-rocks-theme/2 (specs v48.0.0, contracts/themes.md § Format 2, theme-surfaces.feature; since design v4.0.0, specs v99.0.0 § Since v99.0.0: four theme surfaces, fixed radii, the readability mask), or of the format break-rocks-theme/1 (§ The theme object), which stays valid: a theme of the format 1 is read as a theme of the format 2 whose theme surfaces all take its palette. Expand then contract (D-203): what is withdrawn since v99.0.0 is still accepted, marked deprecated, and ignored when read (lib/theme readTheme): the former theme surfaces (read into their family, or gone), the border of a theme surface, surfaceRadius, shape (radius, stroke), typography.accent, the image slots and scrims other than page, pageHeader and mask. The structure only: the backend also checks at publication the contrast (raised to AA by theme surface), the size (64 KB without the images), the images (at most 8, each at most 5 MB, uploaded), the typefaces (approvedTypefaces) and the uniqueness of the name, and computes the scrims (the readability mask among them) and the screenshots, which an input may not carry (THEME_SCRIMS_COMPUTED, THEME_SCREENSHOTS_GENERATED); a served document carries them.",
+  "type": "object",
+  "required": [
+    "format",
+    "name",
+    "variants"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "format": {
+      "enum": [
+        "break-rocks-theme/1",
+        "break-rocks-theme/2"
+      ]
+    },
+    "universe": {
+      "$ref": "#/$defs/universe"
+    },
+    "name": {
+      "$ref": "#/$defs/name"
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 160,
+      "description": "At most 160 visible characters"
+    },
+    "creator": {
+      "type": "string",
+      "minLength": 1,
+      "description": "An account id"
+    },
+    "copiedFrom": {
+      "$ref": "#/$defs/themeRef"
+    },
+    "collection": {
+      "type": "string",
+      "pattern": "^[A-Z][A-Z_]*$",
+      "description": "The field collection of an official theme (SPORT…)"
+    },
+    "version": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Served"
+    },
+    "variants": {
+      "type": "object"
+    },
+    "surfaceRadius": {
+      "type": "object",
+      "deprecated": true,
+      "description": "Deprecated since v99.0.0 (R-02): the radii are fixed by the platform; accepted, never refused (THEME_RADIUS_INVALID no longer raised), ignored"
+    },
+    "typography": {
+      "type": "object"
+    },
+    "gradient": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 3,
+      "items": {
+        "$ref": "#/$defs/color"
+      },
+      "description": "The accent gradient, 2 or 3 colors of the palette"
+    },
+    "motionAccents": {
+      "type": "boolean"
+    },
+    "shape": {
+      "type": "object",
+      "deprecated": true,
+      "description": "Deprecated since v99.0.0 (R-01, R-02): a theme sets no radius (radius) and no stroke width (stroke); accepted with any value, never refused (THEME_RADIUS_INVALID, THEME_STROKE_INVALID no longer raised), ignored"
+    },
+    "images": {
+      "type": "object"
+    },
+    "imageSlots": {
+      "type": "object"
+    },
+    "stickers": {
+      "type": "array",
+      "description": "A set of stickers and emojis"
+    },
+    "scrims": {
+      "type": "object"
+    },
+    "screenshots": {
+      "type": "array",
+      "maxItems": 3,
+      "items": {
+        "type": "string"
+      },
+      "description": "Generated at publication, served only"
+    },
+    "density": {
+      "enum": [
+        "AIRY",
+        "NORMAL",
+        "DENSE"
+      ],
+      "description": "A personal theme only"
+    },
+    "motion": {
+      "enum": [
+        "FULL",
+        "REDUCED",
+        "NONE"
+      ],
+      "description": "A personal theme only"
+    },
+    "sounds": {
+      "type": "boolean",
+      "description": "A personal theme only"
+    }
+  },
+  "if": {
+    "properties": {
+      "format": {
+        "const": "break-rocks-theme/1"
+      }
+    },
+    "required": [
+      "format"
+    ]
+  },
+  "then": {
+    "properties": {
+      "variants": {
+        "$ref": "#/$defs/variantsV1"
+      },
+      "typography": {
+        "$ref": "#/$defs/typographyV1"
+      },
+      "images": {
+        "$ref": "#/$defs/imagesV1"
+      },
+      "surfaceRadius": false,
+      "imageSlots": false,
+      "scrims": false
+    }
+  },
+  "else": {
+    "properties": {
+      "variants": {
+        "$ref": "#/$defs/variantsV2"
+      },
+      "typography": {
+        "$ref": "#/$defs/typographyV2"
+      },
+      "images": {
+        "$ref": "#/$defs/imagesV2"
+      },
+      "imageSlots": {
+        "$ref": "#/$defs/imageSlots"
+      },
+      "scrims": {
+        "$ref": "#/$defs/scrims"
+      }
+    }
+  },
+  "$defs": {
+    "color": {
+      "type": "string",
+      "pattern": "^#[0-9A-Fa-f]{6}$"
+    },
+    "universe": {
+      "type": "string",
+      "pattern": "^%\\S+$",
+      "description": "A universe address: %root, %gaming, %team-fra."
+    },
+    "name": {
+      "type": "string",
+      "pattern": "^(?!.*\\.\\.)\\p{L}[\\p{L}\\p{N}._-]{0,62}[\\p{L}\\p{N}_-]$",
+      "description": "2 to 64 characters: letters, digits, \"-\", \"_\" or \".\"; a letter first; no successive \".\" nor final \".\" (mixed scripts and lookalikes: the backend)"
+    },
+    "themeRef": {
+      "type": "object",
+      "required": [
+        "universe",
+        "name"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "universe": {
+          "$ref": "#/$defs/universe"
+        },
+        "name": {
+          "$ref": "#/$defs/name"
+        },
+        "version": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "deleted": {
+          "type": "boolean"
+        }
+      }
+    },
+    "uploadId": {
+      "type": "string",
+      "pattern": "^(?![A-Za-z][A-Za-z0-9+.-]*:)[^\\s/\\\\]{1,128}$",
+      "description": "An upload id of the platform (requestImageUpload): never a URL nor a path (THEME_EXTERNAL_RESOURCE)"
+    },
+    "image": {
+      "type": "object",
+      "required": [
+        "day"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "day": {
+          "$ref": "#/$defs/uploadId"
+        },
+        "night": {
+          "$ref": "#/$defs/uploadId"
+        }
+      },
+      "description": "An image and its optional night variant (the day one used by night without it)"
+    },
+    "imageOrNull": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "#/$defs/image"
+        }
+      ]
+    },
+    "uploadOrNull": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "#/$defs/uploadId"
+        }
+      ]
+    },
+    "palette": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "background": {
+          "$ref": "#/$defs/color"
+        },
+        "surface": {
+          "$ref": "#/$defs/color"
+        },
+        "text": {
+          "$ref": "#/$defs/color"
+        },
+        "primary": {
+          "$ref": "#/$defs/color"
+        },
+        "accent": {
+          "$ref": "#/$defs/color"
+        },
+        "link": {
+          "$ref": "#/$defs/color"
+        }
+      },
+      "description": "A universe theme gives all six, a personal theme its accent only (checked by the backend with the use)"
+    },
+    "variantV1": {
+      "type": "object",
+      "required": [
+        "palette"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "palette": {
+          "$ref": "#/$defs/palette"
+        }
+      }
+    },
+    "variantV2": {
+      "type": "object",
+      "required": [
+        "palette"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "palette": {
+          "$ref": "#/$defs/palette"
+        },
+        "surfaces": {
+          "$ref": "#/$defs/surfaces"
+        }
+      }
+    },
+    "variantsV1": {
+      "type": "object",
+      "required": [
+        "night",
+        "day"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "night": {
+          "$ref": "#/$defs/variantV1"
+        },
+        "day": {
+          "$ref": "#/$defs/variantV1"
+        }
+      }
+    },
+    "variantsV2": {
+      "type": "object",
+      "required": [
+        "night",
+        "day"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "night": {
+          "$ref": "#/$defs/variantV2"
+        },
+        "day": {
+          "$ref": "#/$defs/variantV2"
+        }
+      }
+    },
+    "surfaceColors": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "background": {
+          "$ref": "#/$defs/color"
+        },
+        "text": {
+          "$ref": "#/$defs/color"
+        },
+        "secondaryText": {
+          "$ref": "#/$defs/color"
+        },
+        "border": {
+          "$ref": "#/$defs/color",
+          "deprecated": true,
+          "description": "Deprecated since v96.0.0 (no longer drawn), v99.0.0: no border around a theme surface; accepted, ignored"
+        }
+      },
+      "description": "The colors of a theme surface in a variant; a color left out takes the palette (Socle: design tokens, surface)"
+    },
+    "surfaces": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "page": {
+          "$ref": "#/$defs/surfaceColors",
+          "description": "Family page: around and between the blocks, under the posts"
+        },
+        "sky": {
+          "$ref": "#/$defs/surfaceColors",
+          "description": "Family sky: the universe sky (the identity bar, the sky column, the universe banner)"
+        },
+        "block": {
+          "$ref": "#/$defs/surfaceColors",
+          "description": "Family block: every block of the page (a widget, a card of the time column, a tile of the time strip, the head row, the quote inside a post, a channel header and bubble, a free block, a widget rail)"
+        },
+        "control": {
+          "$ref": "#/$defs/surfaceColors",
+          "description": "Family control: the buttons, the badges, the chips, the links"
+        },
+        "pageHeader": {
+          "$ref": "#/$defs/surfaceColors",
+          "deprecated": true,
+          "description": "Deprecated since v99.0.0: read into the family sky when the theme leaves it out (the first former theme surface given, in the order of the contract)"
+        },
+        "widget": {
+          "$ref": "#/$defs/surfaceColors",
+          "deprecated": true,
+          "description": "Deprecated since v99.0.0: read into the family block when the theme leaves it out (the first former theme surface given, in the order of the contract)"
+        },
+        "quoteCard": {
+          "$ref": "#/$defs/surfaceColors",
+          "deprecated": true,
+          "description": "Deprecated since v99.0.0: read into the family block when the theme leaves it out (the first former theme surface given, in the order of the contract)"
+        },
+        "timeColumnCard": {
+          "$ref": "#/$defs/surfaceColors",
+          "deprecated": true,
+          "description": "Deprecated since v99.0.0: read into the family block when the theme leaves it out (the first former theme surface given, in the order of the contract)"
+        },
+        "headRow": {
+          "$ref": "#/$defs/surfaceColors",
+          "deprecated": true,
+          "description": "Deprecated since v99.0.0: read into the family block when the theme leaves it out (the first former theme surface given, in the order of the contract)"
+        },
+        "channelHeader": {
+          "$ref": "#/$defs/surfaceColors",
+          "deprecated": true,
+          "description": "Deprecated since v99.0.0: read into the family block when the theme leaves it out (the first former theme surface given, in the order of the contract)"
+        },
+        "channelBubble": {
+          "$ref": "#/$defs/surfaceColors",
+          "deprecated": true,
+          "description": "Deprecated since v99.0.0: read into the family block when the theme leaves it out (the first former theme surface given, in the order of the contract)"
+        },
+        "rail": {
+          "$ref": "#/$defs/surfaceColors",
+          "deprecated": true,
+          "description": "Deprecated since v99.0.0: read into the family block when the theme leaves it out (the first former theme surface given, in the order of the contract)"
+        },
+        "primaryButton": {
+          "$ref": "#/$defs/surfaceColors",
+          "deprecated": true,
+          "description": "Deprecated since v99.0.0: read into the family control when the theme leaves it out (the first former theme surface given, in the order of the contract)"
+        },
+        "secondaryButton": {
+          "$ref": "#/$defs/surfaceColors",
+          "deprecated": true,
+          "description": "Deprecated since v99.0.0: read into the family control when the theme leaves it out (the first former theme surface given, in the order of the contract)"
+        },
+        "badge": {
+          "$ref": "#/$defs/surfaceColors",
+          "deprecated": true,
+          "description": "Deprecated since v99.0.0: read into the family control when the theme leaves it out (the first former theme surface given, in the order of the contract)"
+        },
+        "link": {
+          "$ref": "#/$defs/surfaceColors",
+          "deprecated": true,
+          "description": "Deprecated since v99.0.0: read into the family control when the theme leaves it out (the first former theme surface given, in the order of the contract)"
+        },
+        "postCard": {
+          "$ref": "#/$defs/surfaceColors",
+          "deprecated": true,
+          "description": "Deprecated since v99.0.0: gone (a post has no card; the live line merged into the time strip; the focus bar its chips; the divider 24 pixels); accepted, ignored"
+        },
+        "repostCard": {
+          "$ref": "#/$defs/surfaceColors",
+          "deprecated": true,
+          "description": "Deprecated since v99.0.0: gone (a post has no card; the live line merged into the time strip; the focus bar its chips; the divider 24 pixels); accepted, ignored"
+        },
+        "replyCard": {
+          "$ref": "#/$defs/surfaceColors",
+          "deprecated": true,
+          "description": "Deprecated since v99.0.0: gone (a post has no card; the live line merged into the time strip; the focus bar its chips; the divider 24 pixels); accepted, ignored"
+        },
+        "liveLine": {
+          "$ref": "#/$defs/surfaceColors",
+          "deprecated": true,
+          "description": "Deprecated since v99.0.0: gone (a post has no card; the live line merged into the time strip; the focus bar its chips; the divider 24 pixels); accepted, ignored"
+        },
+        "focusBar": {
+          "$ref": "#/$defs/surfaceColors",
+          "deprecated": true,
+          "description": "Deprecated since v99.0.0: gone (a post has no card; the live line merged into the time strip; the focus bar its chips; the divider 24 pixels); accepted, ignored"
+        },
+        "divider": {
+          "$ref": "#/$defs/surfaceColors",
+          "deprecated": true,
+          "description": "Deprecated since v99.0.0: gone (a post has no card; the live line merged into the time strip; the focus bar its chips; the divider 24 pixels); accepted, ignored"
+        }
+      },
+      "description": "The four families (since v99.0.0) and the former theme surfaces, accepted and deprecated; any other key is refused (THEME_SURFACE_UNKNOWN)"
+    },
+    "typeface": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64,
+      "description": "A name of approvedTypefaces (THEME_TYPEFACE_NOT_APPROVED, checked by the backend)"
+    },
+    "typographyV1": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "title": {
+          "$ref": "#/$defs/typeface"
+        }
+      }
+    },
+    "typographyV2": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "title": {
+          "$ref": "#/$defs/typeface",
+          "description": "The title typeface: the titles, and since v99.0.0 the figures and the short labels of the widgets"
+        },
+        "accent": {
+          "$ref": "#/$defs/typeface",
+          "deprecated": true,
+          "description": "Deprecated since v99.0.0 (R-11): merged with the title typeface; accepted, ignored"
+        }
+      },
+      "description": "No typeface for the body text (THEME_BODY_TYPEFACE): the readable typeface of Socle"
+    },
+    "imagesV1": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "banner": {
+          "$ref": "#/$defs/imageOrNull"
+        },
+        "background": {
+          "$ref": "#/$defs/imageOrNull"
+        },
+        "wordmark": {
+          "$ref": "#/$defs/uploadOrNull"
+        },
+        "pattern": {
+          "$ref": "#/$defs/uploadOrNull"
+        },
+        "texture": {
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/uploadId"
+            },
+            {
+              "$ref": "#/$defs/image"
+            }
+          ]
+        }
+      }
+    },
+    "imagesV2": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "wordmark": {
+          "$ref": "#/$defs/uploadOrNull"
+        },
+        "pattern": {
+          "$ref": "#/$defs/uploadOrNull"
+        }
+      },
+      "description": "The banner, the background and the texture of the format 1 are the image slots pageHeader, page and cardTexture"
+    },
+    "imageSlots": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "page": {
+          "$ref": "#/$defs/imageOrNull"
+        },
+        "pageHeader": {
+          "$ref": "#/$defs/imageOrNull"
+        },
+        "timeColumn": {
+          "$ref": "#/$defs/imageOrNull",
+          "deprecated": true,
+          "description": "Deprecated since v96.0.0 (no longer drawn), not named since v99.0.0; accepted, ignored"
+        },
+        "channelHeader": {
+          "$ref": "#/$defs/imageOrNull",
+          "deprecated": true,
+          "description": "Deprecated since v96.0.0 (no longer drawn), not named since v99.0.0; accepted, ignored"
+        },
+        "cardTexture": {
+          "$ref": "#/$defs/imageOrNull",
+          "deprecated": true,
+          "description": "Deprecated since v96.0.0 (no longer drawn), not named since v99.0.0; accepted, ignored"
+        }
+      },
+      "description": "The image slots: page (behind the page; how it shows: the appearance, none, subtle or through) and pageHeader (the universe banner, behind the sky); the others deprecated, a closed list"
+    },
+    "opacity": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "scrims": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "page": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "night": {
+              "$ref": "#/$defs/opacity"
+            },
+            "dim": {
+              "$ref": "#/$defs/opacity"
+            },
+            "day": {
+              "$ref": "#/$defs/opacity"
+            }
+          }
+        },
+        "pageHeader": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "night": {
+              "$ref": "#/$defs/opacity"
+            },
+            "dim": {
+              "$ref": "#/$defs/opacity"
+            },
+            "day": {
+              "$ref": "#/$defs/opacity"
+            }
+          }
+        },
+        "mask": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "night": {
+              "$ref": "#/$defs/opacity"
+            },
+            "dim": {
+              "$ref": "#/$defs/opacity"
+            },
+            "day": {
+              "$ref": "#/$defs/opacity"
+            }
+          },
+          "description": "Since v99.0.0: the readability mask, with the image of the page shown through: the opacity of the color of the page under every text and control of a block or a post, the lowest that keeps AA over that image in each display mode, never below the floor of the design tokens (surface.mask)"
+        },
+        "timeColumn": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "night": {
+              "$ref": "#/$defs/opacity"
+            },
+            "dim": {
+              "$ref": "#/$defs/opacity"
+            },
+            "day": {
+              "$ref": "#/$defs/opacity"
+            }
+          },
+          "deprecated": true,
+          "description": "Deprecated with its image slot"
+        },
+        "channelHeader": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "night": {
+              "$ref": "#/$defs/opacity"
+            },
+            "dim": {
+              "$ref": "#/$defs/opacity"
+            },
+            "day": {
+              "$ref": "#/$defs/opacity"
+            }
+          },
+          "deprecated": true,
+          "description": "Deprecated with its image slot"
+        },
+        "cardTexture": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "night": {
+              "$ref": "#/$defs/opacity"
+            },
+            "dim": {
+              "$ref": "#/$defs/opacity"
+            },
+            "day": {
+              "$ref": "#/$defs/opacity"
+            }
+          },
+          "deprecated": true,
+          "description": "Deprecated with its image slot"
+        }
+      },
+      "description": "Computed by the backend at publication, served only"
+    }
+  }
+}

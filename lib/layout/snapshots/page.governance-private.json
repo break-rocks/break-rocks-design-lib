@@ -1,0 +1,96 @@
+{
+  "format": "break-rocks-layout/1",
+  "universe": "%root",
+  "name": "governance-private",
+  "description": "The governance page of a private universe: its rules and texts and its pinned channels",
+  "derive": true,
+  "canvases": {
+    "desktop": {
+      "columns": 12,
+      "items": [
+        {
+          "widget": "identityBar",
+          "variant": "full",
+          "row": 1,
+          "col": 1,
+          "cols": 12
+        },
+        {
+          "widget": "rules",
+          "variant": "medium",
+          "row": 2,
+          "col": 1,
+          "cols": 6
+        },
+        {
+          "widget": "pinnedChannels",
+          "variant": "medium",
+          "row": 2,
+          "col": 7,
+          "cols": 6
+        }
+      ],
+      "rails": [],
+      "derived": false
+    },
+    "tablet": {
+      "columns": 8,
+      "items": [
+        {
+          "widget": "identityBar",
+          "variant": "full",
+          "row": 1,
+          "col": 1,
+          "cols": 8
+        },
+        {
+          "widget": "rules",
+          "variant": "medium",
+          "row": 2,
+          "col": 1,
+          "cols": 4
+        },
+        {
+          "widget": "pinnedChannels",
+          "variant": "medium",
+          "row": 2,
+          "col": 5,
+          "cols": 4
+        }
+      ],
+      "rails": [],
+      "derived": true
+    },
+    "phone": {
+      "columns": 4,
+      "items": [
+        {
+          "widget": "identityBar",
+          "variant": "full",
+          "row": 1,
+          "col": 1,
+          "cols": 4
+        },
+        {
+          "widget": "rules",
+          "variant": "full",
+          "row": 2,
+          "col": 1,
+          "cols": 4
+        },
+        {
+          "widget": "pinnedChannels",
+          "variant": "full",
+          "row": 3,
+          "col": 1,
+          "cols": 4
+        }
+      ],
+      "rails": [],
+      "derived": true,
+      "addressBar": "top"
+    }
+  },
+  "page": "governance",
+  "registryVersion": 3
+}

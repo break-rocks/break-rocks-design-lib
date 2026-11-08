@@ -1,0 +1,27 @@
+{
+  "format": "break-rocks-layout/1",
+  "universe": "%root",
+  "name": "governance",
+  "description": "The governance page of a public universe: the open votes, the proposals, the debates, Who governs, My duties, the rules and texts and the governance history",
+  "page": "governance",
+  "derive": true,
+  "canvases": {
+    "desktop": {
+      "columns": 12,
+      "items": [
+        { "widget": "identityBar", "variant": "full", "row": 1, "col": 1, "cols": 12 },
+        { "widget": "openVotes", "variant": "medium", "row": 2, "col": 1, "cols": 6 },
+        { "widget": "proposals", "variant": "medium", "row": 2, "col": 7, "cols": 6 },
+        { "widget": "debates", "variant": "medium", "row": 3, "col": 1, "cols": 6 },
+        { "widget": "whoGoverns", "variant": "medium", "row": 3, "col": 7, "cols": 6, "params": { "style": "gallery" } },
+        { "widget": "myDuties", "variant": "medium", "row": 4, "col": 1, "cols": 6 },
+        { "widget": "rules", "variant": "medium", "row": 4, "col": 7, "cols": 6 },
+        { "widget": "pinnedChannels", "variant": "medium", "row": 5, "col": 1, "cols": 6 },
+        { "widget": "governanceHistory", "variant": "medium", "row": 5, "col": 7, "cols": 6 }
+      ],
+      "rails": []
+    },
+    "tablet": null,
+    "phone": null
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "format": "break-rocks-layout/1",
+  "universe": "%paris",
+  "name": "broken",
+  "description": "No desktop canvas",
+  "derive": true,
+  "canvases": {
+    "tablet": null,
+    "phone": null
+  }
+}

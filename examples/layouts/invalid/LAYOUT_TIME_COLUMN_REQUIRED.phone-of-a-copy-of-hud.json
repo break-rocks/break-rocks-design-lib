@@ -1,0 +1,39 @@
+{
+  "format": "break-rocks-layout/1",
+  "universe": "%paris",
+  "name": "tableau",
+  "description": "The phone canvas of hud without the time column, in another layout than hud",
+  "derive": false,
+  "canvases": {
+    "desktop": {
+      "columns": 12,
+      "items": [
+        { "widget": "identityBar", "variant": "full", "row": 1, "col": 1, "cols": 12 },
+        { "widget": "rulesPost", "variant": "full", "row": 2, "col": 1, "cols": 8 },
+        { "widget": "feed", "variant": "wide", "row": 3, "col": 1, "cols": 8 },
+        { "widget": "timeColumn", "variant": "compact", "row": 3, "col": 9, "cols": 4 }
+      ]
+    },
+    "tablet": {
+      "columns": 8,
+      "items": [
+        { "widget": "identityBar", "variant": "full", "row": 1, "col": 1, "cols": 8 },
+        { "widget": "rulesPost", "variant": "full", "row": 2, "col": 1, "cols": 5 },
+        { "widget": "feed", "variant": "medium", "row": 3, "col": 1, "cols": 5 },
+        { "widget": "timeColumn", "variant": "compact", "row": 3, "col": 6, "cols": 3 }
+      ]
+    },
+    "phone": {
+      "columns": 4,
+      "items": [
+        { "widget": "identityBar", "variant": "full", "row": 1, "col": 1, "cols": 4 },
+        { "widget": "rulesPost", "variant": "full", "row": 2, "col": 1, "cols": 4 },
+        { "widget": "feed", "variant": "full", "row": 3, "col": 1, "cols": 4 },
+        { "widget": "channels", "variant": "button", "rail": "end", "behavior": { "kind": "OPEN" } }
+      ],
+      "rails": [
+        { "id": "end", "side": "END", "folded": true, "pinned": true, "contextual": true }
+      ]
+    }
+  }
+}

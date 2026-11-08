@@ -1,0 +1,2 @@
+{ "format": "break-rocks-theme/1", "universe": "%gaming", "name": "vieux",
+  "variants": { "night": { "palette": { "text": "#F2F4F7" }, "surfaces": { "postCard": { "background": "#1A0F2E" } } }, "day": { "palette": { "text": "#14171C" } } } }

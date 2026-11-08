@@ -1,0 +1,193 @@
+{
+  "format": "break-rocks-layout/1",
+  "universe": "%root",
+  "name": "feed-first-private",
+  "description": "Feed first in a private universe: Who governs, the channels and the sub-universes in place of the time column",
+  "derive": true,
+  "canvases": {
+    "desktop": {
+      "columns": 12,
+      "items": [
+        {
+          "widget": "identityBar",
+          "variant": "full",
+          "row": 1,
+          "col": 1,
+          "cols": 12
+        },
+        {
+          "widget": "headRow",
+          "variant": "full",
+          "row": 2,
+          "col": 1,
+          "cols": 8
+        },
+        {
+          "widget": "feed",
+          "variant": "wide",
+          "row": 3,
+          "col": 1,
+          "cols": 8,
+          "rows": 2,
+          "params": {
+            "filter": "ALL",
+            "composer": "none"
+          },
+          "gestures": {
+            "doubleTap": "fullScreen"
+          },
+          "surface": "transparent"
+        },
+        {
+          "widget": "whoGoverns",
+          "variant": "compact",
+          "row": 2,
+          "col": 9,
+          "cols": 4
+        },
+        {
+          "widget": "channels",
+          "variant": "compact",
+          "row": 3,
+          "col": 9,
+          "cols": 4
+        },
+        {
+          "widget": "subUniverses",
+          "variant": "compact",
+          "row": 4,
+          "col": 9,
+          "cols": 4
+        }
+      ],
+      "rails": [],
+      "derived": false
+    },
+    "tablet": {
+      "columns": 8,
+      "items": [
+        {
+          "widget": "identityBar",
+          "variant": "full",
+          "row": 1,
+          "col": 1,
+          "cols": 8
+        },
+        {
+          "widget": "headRow",
+          "variant": "full",
+          "row": 2,
+          "col": 1,
+          "cols": 5
+        },
+        {
+          "widget": "whoGoverns",
+          "variant": "compact",
+          "row": 2,
+          "col": 6,
+          "cols": 3
+        },
+        {
+          "widget": "feed",
+          "variant": "medium",
+          "row": 3,
+          "col": 1,
+          "cols": 5,
+          "rows": 2,
+          "params": {
+            "filter": "ALL",
+            "composer": "none"
+          },
+          "gestures": {
+            "doubleTap": "fullScreen"
+          },
+          "surface": "transparent"
+        },
+        {
+          "widget": "channels",
+          "variant": "compact",
+          "row": 3,
+          "col": 6,
+          "cols": 3
+        },
+        {
+          "widget": "subUniverses",
+          "variant": "compact",
+          "row": 4,
+          "col": 6,
+          "cols": 3
+        }
+      ],
+      "rails": [],
+      "derived": true
+    },
+    "phone": {
+      "columns": 4,
+      "items": [
+        {
+          "widget": "identityBar",
+          "variant": "full",
+          "row": 1,
+          "col": 1,
+          "cols": 4
+        },
+        {
+          "widget": "headRow",
+          "variant": "full",
+          "row": 2,
+          "col": 1,
+          "cols": 4
+        },
+        {
+          "widget": "feed",
+          "variant": "full",
+          "row": 3,
+          "col": 1,
+          "cols": 4,
+          "params": {
+            "filter": "ALL",
+            "composer": "none"
+          },
+          "gestures": {
+            "doubleTap": "fullScreen"
+          },
+          "surface": "transparent"
+        },
+        {
+          "widget": "whoGoverns",
+          "variant": "button",
+          "rail": "end",
+          "behavior": {
+            "kind": "OPEN"
+          }
+        },
+        {
+          "widget": "channels",
+          "variant": "button",
+          "rail": "end",
+          "behavior": {
+            "kind": "OPEN"
+          }
+        },
+        {
+          "widget": "subUniverses",
+          "variant": "button",
+          "rail": "end",
+          "behavior": {
+            "kind": "OPEN"
+          }
+        }
+      ],
+      "rails": [
+        {
+          "id": "end",
+          "side": "END",
+          "folded": true
+        }
+      ],
+      "derived": true,
+      "addressBar": "top"
+    }
+  },
+  "registryVersion": 3
+}

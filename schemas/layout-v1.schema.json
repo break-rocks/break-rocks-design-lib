@@ -1,0 +1,521 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:break-rocks:schema:layout-v1",
+  "title": "break-rocks layout, format 1",
+  "description": "A layout document of the format break-rocks-layout/1 (specs v48.0.0 to v101.3.3, contracts/layouts.md § The layout document, § The dashboard, § The governance page, § The pages of a universe; universe-layouts.feature, widgets.feature): a canvas per breakpoint, its items (widgets of the registry in their widget variants), its widget rails, the gestures and the behaviors of its live buttons, and derive. The structure only: what needs the widget registry (registry/widgets.json) — the variants of each widget, the spans, the overlaps, the rails, the parameters, the invariants and the widget budget — is checked by checkLayout (the backend; here scripts/check-documents.mjs), and the derivation is the shared library of the backend. A layout carries no color, typeface nor image. Since specs v99.0.0 (D-293), the live line is merged into the time strip the apps draw: the widget liveLine and the action turn stay accepted for the documents published before, their placement ignored (checkLayout).",
+  "type": "object",
+  "required": [
+    "format",
+    "name",
+    "canvases"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "format": {
+      "const": "break-rocks-layout/1",
+      "description": "LAYOUT_FORMAT_INVALID"
+    },
+    "universe": {
+      "$ref": "#/$defs/universe"
+    },
+    "name": {
+      "$ref": "#/$defs/name"
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 160,
+      "description": "LAYOUT_DESCRIPTION_TOO_LONG"
+    },
+    "creator": {
+      "type": "string",
+      "minLength": 1,
+      "description": "An account id"
+    },
+    "copiedFrom": {
+      "$ref": "#/$defs/layoutRef"
+    },
+    "collection": {
+      "type": "string",
+      "pattern": "^[A-Z][A-Z_]*$",
+      "description": "The field collection of a field layout"
+    },
+    "page": {
+      "enum": [
+        "home",
+        "governance",
+        "agenda",
+        "members",
+        "about"
+      ],
+      "default": "home",
+      "description": "Since specs v49.9.0, the page the layout is for (LAYOUT_PAGE_INVALID): the page of a universe (home, by default) or the governance page; agenda, members and about (since specs v50.0.0) for the platform layouts only. A page other than home is checked by checkPageCanvases (lib/layout)"
+    },
+    "derive": {
+      "type": "boolean",
+      "default": true,
+      "description": "true: the canvases left null are derived from the desktop one; false: each is given (LAYOUT_CANVAS_MISSING)"
+    },
+    "canvases": {
+      "type": "object",
+      "required": [
+        "desktop"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "desktop": {
+          "$ref": "#/$defs/canvas",
+          "description": "LAYOUT_DESKTOP_MISSING"
+        },
+        "tablet": {
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/canvas"
+            }
+          ]
+        },
+        "phone": {
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/phoneCanvas"
+            }
+          ]
+        }
+      }
+    },
+    "version": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Served"
+    },
+    "registryVersion": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Served: the version of the widget registry the document was completed for"
+    },
+    "screenshots": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "desktop": {
+          "type": "string"
+        },
+        "tablet": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        }
+      },
+      "description": "Generated at publication, served only (LAYOUT_SCREENSHOTS_GENERATED)"
+    }
+  },
+  "$defs": {
+    "universe": {
+      "type": "string",
+      "pattern": "^%\\S+$",
+      "description": "A universe address: %root, %gaming, %team-fra."
+    },
+    "name": {
+      "type": "string",
+      "pattern": "^(?!.*\\.\\.)\\p{L}[\\p{L}\\p{N}._-]{0,62}[\\p{L}\\p{N}_-]$",
+      "description": "LAYOUT_NAME_INVALID: as a theme, 2 to 64 characters, a letter first, no successive \".\" nor final \".\""
+    },
+    "layoutRef": {
+      "type": "object",
+      "required": [
+        "universe",
+        "name"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "universe": {
+          "$ref": "#/$defs/universe"
+        },
+        "name": {
+          "$ref": "#/$defs/name"
+        },
+        "version": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "deleted": {
+          "type": "boolean"
+        }
+      }
+    },
+    "canvas": {
+      "type": "object",
+      "required": [
+        "columns",
+        "items"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "columns": {
+          "enum": [
+            4,
+            8,
+            12
+          ],
+          "description": "LAYOUT_COLUMNS_INVALID; the phone 4 by default, the tablet 8, the desktop 12"
+        },
+        "items": {
+          "type": "array",
+          "maxItems": 64,
+          "items": {
+            "$ref": "#/$defs/item"
+          }
+        },
+        "rails": {
+          "type": "array",
+          "maxItems": 3,
+          "items": {
+            "$ref": "#/$defs/rail"
+          },
+          "description": "At most one rail per side (LAYOUT_RAIL_INVALID, checked with the registry)"
+        },
+        "derived": {
+          "type": "boolean",
+          "description": "Served: the canvas is derived from the desktop one"
+        }
+      }
+    },
+    "phoneCanvas": {
+      "type": "object",
+      "required": [
+        "columns",
+        "items"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "columns": {
+          "enum": [
+            4,
+            8,
+            12
+          ],
+          "description": "LAYOUT_COLUMNS_INVALID; the phone 4 by default, the tablet 8, the desktop 12"
+        },
+        "items": {
+          "type": "array",
+          "maxItems": 64,
+          "items": {
+            "$ref": "#/$defs/item"
+          }
+        },
+        "rails": {
+          "type": "array",
+          "maxItems": 3,
+          "items": {
+            "$ref": "#/$defs/rail"
+          },
+          "description": "At most one rail per side (LAYOUT_RAIL_INVALID, checked with the registry)"
+        },
+        "derived": {
+          "type": "boolean",
+          "description": "Served: the canvas is derived from the desktop one"
+        },
+        "addressBar": {
+          "enum": [
+            "top",
+            "bottom"
+          ],
+          "default": "top",
+          "description": "The phone canvas only (LAYOUT_FRAME_INVALID): the address bar of the platform frame at the bottom, as \"studio\""
+        }
+      }
+    },
+    "rail": {
+      "type": "object",
+      "required": [
+        "id",
+        "side"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9-]{0,31}$"
+        },
+        "side": {
+          "enum": [
+            "START",
+            "END",
+            "BOTTOM"
+          ],
+          "description": "START and END follow the reading direction"
+        },
+        "folded": {
+          "type": "boolean",
+          "description": "Read on the desktop and the tablet"
+        },
+        "pinned": {
+          "type": "boolean",
+          "description": "Since specs v69.0.0, read on the phone: its live buttons along its edge, visible without a gesture, without a tab (false by default: a phone rail not pinned is folded)"
+        },
+        "contextual": {
+          "type": "boolean",
+          "description": "Since specs v79.0.0, read on the phone with pinned only: only its live buttons that carry a news badge are drawn, at most 3, in the order of the rail; the rail is not drawn without any (the contextual widget rail; false by default)"
+        }
+      }
+    },
+    "action": {
+      "description": "A widget action named by a gesture; turn withdrawn since specs v99.0.0 (accepted for the documents published before, on the live line, ignored; refused on a widget placed: LAYOUT_GESTURE_INVALID)",
+      "enum": [
+        "fullScreen",
+        "expand",
+        "open",
+        "switch",
+        "stow",
+        "variant",
+        "step",
+        "turn"
+      ]
+    },
+    "behavior": {
+      "oneOf": [
+        {
+          "type": "object",
+          "required": [
+            "kind"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "kind": {
+              "enum": [
+                "EXPAND",
+                "OPEN"
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [
+            "kind",
+            "focus"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "kind": {
+              "const": "SWITCH"
+            },
+            "focus": {
+              "enum": [
+                "POSTS",
+                "CLIPS",
+                "MAP",
+                "DEBATES"
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [
+            "kind",
+            "layout"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "kind": {
+              "const": "SWITCH"
+            },
+            "layout": {
+              "$ref": "#/$defs/layoutRef"
+            }
+          }
+        }
+      ],
+      "description": "A live button: EXPAND (on the canvas only), OPEN (default), SWITCH to a focus (POSTS, CLIPS, MAP or DEBATES since specs v79.0.0) or to a layout (LAYOUT_BEHAVIOR_INVALID)"
+    },
+    "item": {
+      "type": "object",
+      "required": [
+        "widget",
+        "variant"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "widget": {
+          "enum": [
+            "feed",
+            "clips",
+            "timeColumn",
+            "liveLine",
+            "whoGoverns",
+            "agenda",
+            "projects",
+            "debates",
+            "channels",
+            "subUniverses",
+            "showcase",
+            "map",
+            "identityBar",
+            "universeBanner",
+            "rulesPost",
+            "headRow",
+            "pulse",
+            "welcomeWall",
+            "layoutSwitcher",
+            "openVotes",
+            "proposals",
+            "myDuties",
+            "rules",
+            "pinnedChannels",
+            "governanceHistory",
+            "members",
+            "toHandle",
+            "textBlock",
+            "imageBlock",
+            "linkBlock",
+            "channelBlock",
+            "buttonBlock",
+            "separatorBlock",
+            "spaceBlock",
+            "navigation"
+          ],
+          "description": "A widget of the registry (LAYOUT_WIDGET_UNKNOWN); a free block on a custom page and the about page only, with its id and content in the document break-rocks-layout/3 (LAYOUT_WIDGET_NOT_ON_PAGE)"
+        },
+        "variant": {
+          "enum": [
+            "full",
+            "wide",
+            "medium",
+            "compact",
+            "button",
+            "hidden"
+          ],
+          "description": "Among those of the widget (LAYOUT_VARIANT_NOT_ALLOWED)"
+        },
+        "row": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 64
+        },
+        "col": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 12
+        },
+        "cols": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 12,
+          "description": "Within the span of the variant (LAYOUT_SPAN_INVALID)"
+        },
+        "rows": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 64,
+          "default": 1
+        },
+        "params": {
+          "type": "object",
+          "description": "The parameters of the widget (LAYOUT_PARAM_INVALID)"
+        },
+        "gestures": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "doubleTap": {
+              "$ref": "#/$defs/action"
+            },
+            "longPress": {
+              "$ref": "#/$defs/action"
+            }
+          },
+          "description": "A widget action of the widget; never longPress on the feed (LAYOUT_GESTURE_INVALID)"
+        },
+        "rail": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9-]{0,31}$",
+          "description": "The id of a rail of the canvas, for an item in button (LAYOUT_RAIL_INVALID)"
+        },
+        "behavior": {
+          "$ref": "#/$defs/behavior"
+        },
+        "contextual": {
+          "enum": [
+            null,
+            "button",
+            "hidden"
+          ],
+          "description": "The agenda, the debates and the projects only (LAYOUT_CONTEXTUAL_INVALID)"
+        },
+        "surface": {
+          "enum": [
+            "opaque",
+            "transparent"
+          ],
+          "default": "opaque"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "rail": true
+            },
+            "required": [
+              "rail"
+            ]
+          },
+          "then": {
+            "properties": {
+              "variant": {
+                "const": "button"
+              },
+              "row": false,
+              "col": false,
+              "cols": false,
+              "rows": false
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "rail": false,
+              "variant": {
+                "not": {
+                  "const": "hidden"
+                }
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "row",
+              "col",
+              "cols"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "behavior": true
+            },
+            "required": [
+              "behavior"
+            ]
+          },
+          "then": {
+            "properties": {
+              "variant": {
+                "const": "button"
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

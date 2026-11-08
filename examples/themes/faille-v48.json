@@ -1,0 +1,40 @@
+{
+  "format": "break-rocks-theme/2",
+  "universe": "%gaming",
+  "name": "faille-v48",
+  "description": "Faille as written before specs v99.0.0: former theme surfaces, radii, stroke, accent typeface",
+  "creator": "a1b2c3d4-0000-4000-8000-000000000001",
+  "copiedFrom": { "universe": "%root", "name": "socle" },
+  "variants": {
+    "night": {
+      "palette": { "background": "#0E1116", "surface": "#161B22", "text": "#F2F4F7", "primary": "#E5484D", "accent": "#4CC2FF", "link": "#7CC4FF" },
+      "surfaces": {
+        "postCard": { "background": "#1A0F2E", "text": "#F2F4F7", "secondaryText": "#B8B2C8", "border": "#FF2BD6" },
+        "timeColumnCard": { "background": "#20123A" },
+        "primaryButton": { "background": "#FF2BD6", "text": "#0E1116" },
+        "badge": { "background": "#2A1846", "text": "#F2F4F7" }
+      }
+    },
+    "day": {
+      "palette": { "background": "#FFFFFF", "surface": "#F4F5F7", "text": "#14171C", "primary": "#C8102E", "accent": "#0067B8", "link": "#0057A0" },
+      "surfaces": {
+        "postCard": { "background": "#FBF2FF", "text": "#14171C", "secondaryText": "#5A4E66", "border": "#B0129A" },
+        "primaryButton": { "background": "#B0129A", "text": "#FFFFFF" }
+      }
+    }
+  },
+  "surfaceRadius": { "postCard": 12, "primaryButton": "round" },
+  "typography": { "title": "Bebas Neue", "accent": "Orbitron" },
+  "gradient": ["#0E1116", "#4CC2FF"],
+  "motionAccents": true,
+  "shape": { "radius": "sharp", "stroke": "thin" },
+  "imageSlots": {
+    "page": { "day": "img-01HZX7Q2P", "night": "img-01HZX7Q2Q" },
+    "pageHeader": { "day": "img-01HZX7Q2R" },
+    "timeColumn": { "day": "img-01HZX7Q2S" },
+    "channelHeader": null,
+    "cardTexture": { "day": "img-01HZX7Q2T" }
+  },
+  "images": { "wordmark": "img-01HZX7Q2U", "pattern": null },
+  "stickers": []
+}

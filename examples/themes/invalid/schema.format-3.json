@@ -1,0 +1,2 @@
+{ "format": "break-rocks-theme/3", "universe": "%gaming", "name": "faille",
+  "variants": { "night": { "palette": { "text": "#F2F4F7" } }, "day": { "palette": { "text": "#14171C" } } } }

@@ -1,0 +1,96 @@
+{
+  "format": "break-rocks-layout/1",
+  "universe": "%root",
+  "name": "agenda",
+  "description": "The agenda page of a public universe: the agenda and the map widget",
+  "derive": true,
+  "canvases": {
+    "desktop": {
+      "columns": 12,
+      "items": [
+        {
+          "widget": "identityBar",
+          "variant": "full",
+          "row": 1,
+          "col": 1,
+          "cols": 12
+        },
+        {
+          "widget": "agenda",
+          "variant": "medium",
+          "row": 2,
+          "col": 1,
+          "cols": 7
+        },
+        {
+          "widget": "map",
+          "variant": "medium",
+          "row": 2,
+          "col": 8,
+          "cols": 5
+        }
+      ],
+      "rails": [],
+      "derived": false
+    },
+    "tablet": {
+      "columns": 8,
+      "items": [
+        {
+          "widget": "identityBar",
+          "variant": "full",
+          "row": 1,
+          "col": 1,
+          "cols": 8
+        },
+        {
+          "widget": "agenda",
+          "variant": "medium",
+          "row": 2,
+          "col": 1,
+          "cols": 5
+        },
+        {
+          "widget": "map",
+          "variant": "compact",
+          "row": 2,
+          "col": 6,
+          "cols": 3
+        }
+      ],
+      "rails": [],
+      "derived": true
+    },
+    "phone": {
+      "columns": 4,
+      "items": [
+        {
+          "widget": "identityBar",
+          "variant": "full",
+          "row": 1,
+          "col": 1,
+          "cols": 4
+        },
+        {
+          "widget": "agenda",
+          "variant": "full",
+          "row": 2,
+          "col": 1,
+          "cols": 4
+        },
+        {
+          "widget": "map",
+          "variant": "full",
+          "row": 3,
+          "col": 1,
+          "cols": 4
+        }
+      ],
+      "rails": [],
+      "derived": true,
+      "addressBar": "top"
+    }
+  },
+  "page": "agenda",
+  "registryVersion": 3
+}

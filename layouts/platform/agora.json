@@ -1,0 +1,42 @@
+{
+  "format": "break-rocks-layout/1",
+  "universe": "%root",
+  "name": "agora",
+  "description": "Agora: the time column and the open debates, then the feed",
+  "derive": false,
+  "canvases": {
+    "desktop": {
+      "columns": 12,
+      "items": [
+        { "widget": "identityBar", "variant": "full", "row": 1, "col": 1, "cols": 12 },
+        { "widget": "timeColumn", "variant": "compact", "row": 2, "col": 1, "cols": 4, "rows": 3, "params": { "chart": "gauge" } },
+        { "widget": "debates", "variant": "wide", "row": 2, "col": 5, "cols": 8 },
+        { "widget": "rulesPost", "variant": "full", "row": 3, "col": 5, "cols": 8, "params": { "folded": true } },
+        { "widget": "feed", "variant": "wide", "row": 4, "col": 5, "cols": 8, "params": { "filter": "ALL", "composer": "none" }, "gestures": { "doubleTap": "fullScreen" }, "surface": "transparent" }
+      ],
+      "rails": []
+    },
+    "tablet": {
+      "columns": 8,
+      "items": [
+        { "widget": "identityBar", "variant": "full", "row": 1, "col": 1, "cols": 8 },
+        { "widget": "timeColumn", "variant": "compact", "row": 2, "col": 1, "cols": 3, "rows": 3, "params": { "chart": "gauge" } },
+        { "widget": "debates", "variant": "medium", "row": 2, "col": 4, "cols": 5 },
+        { "widget": "rulesPost", "variant": "full", "row": 3, "col": 4, "cols": 5, "params": { "folded": true } },
+        { "widget": "feed", "variant": "medium", "row": 4, "col": 4, "cols": 5, "params": { "filter": "ALL", "composer": "none" }, "gestures": { "doubleTap": "fullScreen" }, "surface": "transparent" }
+      ],
+      "rails": []
+    },
+    "phone": {
+      "columns": 4,
+      "items": [
+        { "widget": "identityBar", "variant": "full", "row": 1, "col": 1, "cols": 4 },
+        { "widget": "timeColumn", "variant": "full", "row": 2, "col": 1, "cols": 4, "params": { "chart": "gauge" } },
+        { "widget": "debates", "variant": "full", "row": 3, "col": 1, "cols": 4 },
+        { "widget": "rulesPost", "variant": "full", "row": 4, "col": 1, "cols": 4, "params": { "folded": true } },
+        { "widget": "feed", "variant": "full", "row": 5, "col": 1, "cols": 4, "params": { "filter": "ALL", "composer": "none" }, "gestures": { "doubleTap": "fullScreen" }, "surface": "transparent" }
+      ],
+      "rails": []
+    }
+  }
+}
